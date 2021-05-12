@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct Location: Codable {
+struct Location: Decodable {
     let id : Int
     let name : String
     let Country : String
