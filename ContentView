@@ -1,0 +1,41 @@
+
+import SwiftUI
+
+struct ContentView: View {
+    let location : Location
+    
+    var body: some View {
+        ScrollView{
+            Image(location.heropicture)
+            .resizable()
+            .scaledToFit()
+        
+            
+            Text(location.name)
+            .font(.largeTitle)
+            
+            Text(location.Country)
+                .font(.title)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+            
+            Text(location.Description)
+                .padding(.horizontal)
+            
+            Text(location.more)
+                .bold()
+                .font(.title3)
+                .padding(.top)
+            
+            Text(location.more)
+                .padding(.horizontal)
+        }
+        .navigationTitle("Discover")
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(location: Location.example)
+    }
+}
