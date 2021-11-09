@@ -1,0 +1,81 @@
+//
+//  ContentView.swift
+//  VartaLabh
+//
+//  Created by Manas Saxena on 04/11/21.
+//
+
+import SwiftUI
+import AVFoundation
+
+struct ContentView: View {
+    var body: some View {
+        HStack{
+            VStack{
+         CardView(content: "I need to go Bathroom.")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I need to go bathroom.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+         CardView(content: "I am hungry.")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I am Hungry.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+            }
+            VStack{
+         CardView(content: "I am having itching.")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I am having itching.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+         CardView(content: "I cant see anything.")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I cant see anything.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+            }
+        }
+        .padding()
+    }
+}
+
+struct CardView: View{
+    var content: String
+    @State var isFaceUp: Bool = true
+    
+    var body: some View{
+        ZStack{
+            let shape = RoundedRectangle(cornerRadius: 20)
+            if isFaceUp{
+            shape
+                .stroke(lineWidth: 3)
+                .foregroundColor(.blue)
+            Text(content)
+            }
+            else{
+                shape
+                    .fill()
+                    .foregroundColor(.blue)
+            }
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
