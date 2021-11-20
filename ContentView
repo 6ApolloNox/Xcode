@@ -1,41 +1,95 @@
+//
+//  ContentView.swift
+//  VartaLabh
+//
+//  Created by Manas Saxena on 04/11/21.
+//
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
-    let location : Location
-    
     var body: some View {
-        ScrollView{
-            Image(location.heropicture)
-            .resizable()
-            .scaledToFit()
-        
-            
-            Text(location.name)
-            .font(.largeTitle)
-            
-            Text(location.Country)
-                .font(.title)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-            
-            Text(location.Description)
-                .padding(.horizontal)
-            
-            Text(location.more)
-                .bold()
-                .font(.title3)
-                .padding(.top)
-            
-            Text(location.more)
-                .padding(.horizontal)
+        HStack{
+            VStack{
+                CardView(content: "I need to go Bathroom.", image: "bathroom")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I need to go bathroom.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+                CardView(content: "I am hungry.", image: "hungry")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I am Hungry.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+                CardView(content: "I need water.", image: "Bottle")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I need water.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+            }
+            VStack{
+                CardView(content: "I am having itching.", image: "itch")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I am having itching.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+                CardView(content: "I need medicine.", image: "eye" )
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "I need medicine.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+                CardView(content: "Call the doctor.", image: "Doctor")
+                    .onTapGesture {
+                        let utterance = AVSpeechUtterance(string: "Call the Doctor.")
+                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+                        utterance.rate = 0.5
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.speak(utterance)
+                    }
+            }
         }
-        .navigationTitle("Discover")
+        .padding()
+    }
+}
+
+struct CardView: View{
+    var content: String
+    var image: String
+    @State var isFaceUp: Bool = true
+    
+    var body: some View{
+            ZStack{
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(lineWidth: 3)
+                    .foregroundColor(.red)
+                VStack{
+                Text(content)
+                Image(image)
+                        .resizable()
+                        .scaledToFit()
+                }
+            }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(location: Location.example)
+        ContentView()
     }
 }
