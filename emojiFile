@@ -1,0 +1,89 @@
+//
+//  ContentView.swift
+//  COOLSTUFF
+//
+//  Created by Manas Saxena on 02/08/21.
+//
+
+import SwiftUI
+import UIKit
+import AVFoundation
+
+struct ContentView: View {
+    var body: some View {
+        ScrollView{
+            Text("How are you feeling today?")
+            HStack{
+             CardView(content: "I want to go bathroom.", image: "🚽", text: "I need to go bathroom.")
+                
+             CardView(content: "I am hungry.", image: "🍜",text: "I am hungry.")
+                    
+            }
+            HStack{
+                CardView(content: "I am thirsty.", image: "💧", text: "I am thirsty")
+                    
+                CardView(content: "I am having itching.", image: "👆🏽", text: "I am having itching.")
+                    
+            }
+            HStack{
+                CardView(content: "Call the doctor.", image: "🧑🏼‍⚕️", text: "Call the doctor.")
+                                    CardView(content: "Call the nurse.", image: "👩🏻‍⚕️", text: "Call the nurse")
+                    
+            }
+            HStack{
+                CardView(content: "I need Medicine", image: "💊", text: " I need medicine.")
+                    
+                CardView(content: "I am having headache.", image: "🤕", text: "I am having headache.")
+                    
+            }
+            HStack{
+                CardView(content: "I am having Acidity", image: "🌶",text: " I am having acidity.")
+                    
+                CardView(content: "I am feeling chest pain.", image: "🫀", text: "I am  having chestpain.")
+                    
+            }
+            HStack{
+                CardView(content: "I am feeling Cold", image: "🥶", text: "I am feeling cold")
+                   
+                CardView(content: "I am feeling Hot", image: "🤒", text: "I am feeling hot.")
+                    
+            }
+        }
+        .padding(.horizontal)
+      }
+    }
+
+
+struct CardView: View{
+    var content: String
+    var image: String
+    var text: String
+    
+    var body: some View{
+        ZStack{
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(lineWidth: 3)
+            VStack{
+                Text(content)
+                Text(image)
+                    .font(.system(size: 90))
+            }
+        }
+        .onTapGesture {
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+            utterance.rate = 0.5
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+
+        }
+    }
+}
+
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
