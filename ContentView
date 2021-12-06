@@ -1,95 +1,98 @@
 //
 //  ContentView.swift
-//  VartaLabh
+//  COOLSTUFF
 //
-//  Created by Manas Saxena on 04/11/21.
+//  Created by Manas Saxena on 02/08/21.
 //
 
 import SwiftUI
+import UIKit
 import AVFoundation
 
 struct ContentView: View {
     var body: some View {
-        HStack{
-            VStack{
-                CardView(content: "I need to go Bathroom.", image: "bathroom")
-                    .onTapGesture {
-                        let utterance = AVSpeechUtterance(string: "I need to go bathroom.")
-                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-                        utterance.rate = 0.5
-                        let synthesizer = AVSpeechSynthesizer()
-                        synthesizer.speak(utterance)
-                    }
-                CardView(content: "I am hungry.", image: "hungry")
-                    .onTapGesture {
-                        let utterance = AVSpeechUtterance(string: "I am Hungry.")
-                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-                        utterance.rate = 0.5
-                        let synthesizer = AVSpeechSynthesizer()
-                        synthesizer.speak(utterance)
-                    }
-                CardView(content: "I need water.", image: "Bottle")
-                    .onTapGesture {
-                        let utterance = AVSpeechUtterance(string: "I need water.")
-                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-                        utterance.rate = 0.5
-                        let synthesizer = AVSpeechSynthesizer()
-                        synthesizer.speak(utterance)
-                    }
+        ScrollView{
+            Text("HOW ARE YOU FEELING")
+                .padding()
+                .font(.title2)
+                
+            HStack{
+             CardView(content: "I want to go bathroom", image: "toilet", text: "I need to go bathroom.")
+                
+             CardView(content: "I am hungry", image: "food",text: "I am hungry.")
+                    
             }
-            VStack{
-                CardView(content: "I am having itching.", image: "itch")
-                    .onTapGesture {
-                        let utterance = AVSpeechUtterance(string: "I am having itching.")
-                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-                        utterance.rate = 0.5
-                        let synthesizer = AVSpeechSynthesizer()
-                        synthesizer.speak(utterance)
-                    }
-                CardView(content: "I need medicine.", image: "eye" )
-                    .onTapGesture {
-                        let utterance = AVSpeechUtterance(string: "I need medicine.")
-                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-                        utterance.rate = 0.5
-                        let synthesizer = AVSpeechSynthesizer()
-                        synthesizer.speak(utterance)
-                    }
-                CardView(content: "Call the doctor.", image: "Doctor")
-                    .onTapGesture {
-                        let utterance = AVSpeechUtterance(string: "Call the Doctor.")
-                        utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-                        utterance.rate = 0.5
-                        let synthesizer = AVSpeechSynthesizer()
-                        synthesizer.speak(utterance)
-                    }
+            HStack{
+                CardView(content: "I am thirsty", image: "water", text: "I am thirsty")
+                    
+                CardView(content: "I have leg pain", image: "legPain", text: "I have leg pain.")
+                    
+            }
+            HStack{
+                CardView(content: "Call the doctor", image: "doctor", text: "Call the doctor.")
+                                    CardView(content: "Call the nurse.", image: "nurse", text: "Call the nurse")
+                    
+            }
+            HStack{
+                CardView(content: "I need Medicine", image: "medicine", text: " I need medicine.")
+                    
+                CardView(content: "I am having headache", image: "Headache", text: "I am having headache.")
+                    
+            }
+            HStack{
+                CardView(content: "I am having Acidity", image: "Acidity",text: " I am having acidity.")
+                    
+                CardView(content: "I am feeling chest pain", image: "chestPain", text: "I am  having chestpain.")
+                    
+            }
+            HStack{
+                CardView(content: "I am feeling Cold", image: "ColdFeel", text: "I am feeling cold")
+                   
+                CardView(content: "I am feeling Hot", image: "HotFace", text: "I am feeling hot.")
+                    
+            }
+            HStack{
+                CardView(content: "Breathing difficulty.", image: "DiffBreathing", text: "I have breathing difficulty.")
+                CardView(content: "Difficulty in swallowing", image: "DiffSwallow", text: "I have difficulty in swallowing.")
             }
         }
-        .padding()
+        .padding(.horizontal)
+      }
     }
-}
+
 
 struct CardView: View{
     var content: String
     var image: String
-    @State var isFaceUp: Bool = true
+    var text: String
     
     var body: some View{
-            ZStack{
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(lineWidth: 3)
-                    .foregroundColor(.red)
-                VStack{
+        ZStack{
+            RoundedRectangle(cornerRadius: 20)
+                .strokeBorder(lineWidth: 3)
+            VStack{
                 Text(content)
                 Image(image)
-                        .resizable()
-                        .scaledToFit()
-                }
+                    .resizable()
+                    .scaledToFit()
             }
+        }
+        .onTapGesture {
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+            utterance.rate = 0.5
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
+
+        }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
